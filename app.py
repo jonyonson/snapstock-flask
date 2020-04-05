@@ -8,19 +8,19 @@ app = Flask(__name__)
 
 @app.route('/indices')
 def indices():
-    dji = get_quote_table('^dji')
-    dji['Change'] = dji['Quote Price'] - dji['Previous Close']
-    dji['Percent Change'] = dji['Change'] / dji['Previous Close'] * 100
+    dow = get_quote_table('^dji')
+    dow['Change'] = dow['Quote Price'] - dow['Previous Close']
+    dow['Percent Change'] = dow['Change'] / dow['Previous Close'] * 100
 
-    sp = get_quote_table('^gspc')
-    sp['Change'] = sp['Quote Price'] - sp['Previous Close']
-    sp['Percent Change'] = sp['Change'] / sp['Previous Close'] * 100
+    sp500 = get_quote_table('^gspc')
+    sp500['Change'] = sp500['Quote Price'] - sp500['Previous Close']
+    sp500['Percent Change'] = sp500['Change'] / sp500['Previous Close'] * 100
 
     nasdaq = get_quote_table('^ixic')
     nasdaq['Change'] = nasdaq['Quote Price'] - nasdaq['Previous Close']
     nasdaq['Percent Change'] = nasdaq['Change'] / \
         nasdaq['Previous Close'] * 100
-    major_indices = {'dji': dji, 'sp': sp, 'nasdaq': nasdaq}
+    major_indices = {'dow': dow, 'sp500': sp500, 'nasdaq': nasdaq}
 
     return jsonify(major_indices), 200
 
