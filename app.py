@@ -20,7 +20,7 @@ def indices():
     nasdaq['Change'] = nasdaq['Quote Price'] - nasdaq['Previous Close']
     nasdaq['Percent Change'] = nasdaq['Change'] / \
         nasdaq['Previous Close'] * 100
-    major_indices = {'dji': dji, 'sp': sp, 'nadaq': nasdaq}
+    major_indices = {'dji': dji, 'sp': sp, 'nasdaq': nasdaq}
 
     return jsonify(major_indices), 200
 
