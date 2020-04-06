@@ -20,10 +20,42 @@ def indices():
     nasdaq['Change'] = nasdaq['Quote Price'] - nasdaq['Previous Close']
     nasdaq['Percent Change'] = nasdaq['Change'] / \
         nasdaq['Previous Close'] * 100
+
+    # russell = get_quote_table('^gspc')
+    # russell['Change'] = russell['Quote Price'] - russell['Previous Close']
+    # russell['Percent Change'] = russell['Change'] / russell['Previous Close'] * 100
+
     major_indices = {'dow': dow, 'sp500': sp500, 'nasdaq': nasdaq}
 
     return jsonify(major_indices), 200
 
+
+@app.route('/indices/<index>')
+def get_index(index):
+    if index == 'dow':
+        dow = get_quote_table('^dji')
+        dow['Change'] = dow['Quote Price'] - dow['Previous Close']
+        dow['Percent Change'] = dow['Change'] / dow['Previous Close'] * 100
+        result = dow
+    elif index == 'sp500':
+        sp500 = get_quote_table('^gspc')
+        sp500['Change'] = sp500['Quote Price'] - sp500['Previous Close']
+        sp500['Percent Change'] = sp500['Change'] / sp500['Previous Close'] * 100
+        result = sp500
+    elif index == 'nasdaq':
+        nasdaq = get_quote_table('^ixic')
+        nasdaq['Change'] = nasdaq['Quote Price'] - nasdaq['Previous Close']
+        nasdaq['Percent Change'] = nasdaq['Change'] / \
+            nasdaq['Previous Close'] * 100
+        result = nasdaq
+    elif index == 'russell':
+        russell = get_quote_table('^gspc')
+        russell['Change'] = russell['Quote Price'] - russell['Previous Close']
+        russell['Percent Change'] = russell['Change'] / \
+            russell['Previous Close'] * 100
+        result = russell
+
+    return jsonify({index: result}), 200
 
 
 if __name__ == '__main__':
