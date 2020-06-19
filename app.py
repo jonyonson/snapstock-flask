@@ -40,7 +40,8 @@ def get_index(index):
     elif index == 'sp500':
         sp500 = get_quote_table('^gspc')
         sp500['Change'] = sp500['Quote Price'] - sp500['Previous Close']
-        sp500['Percent Change'] = sp500['Change'] / sp500['Previous Close'] * 100
+        sp500['Percent Change'] = sp500['Change'] / \
+            sp500['Previous Close'] * 100
         result = sp500
     elif index == 'nasdaq':
         nasdaq = get_quote_table('^ixic')
