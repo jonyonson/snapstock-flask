@@ -21,10 +21,6 @@ def indices():
     nasdaq['Percent Change'] = nasdaq['Change'] / \
         nasdaq['Previous Close'] * 100
 
-    # russell = get_quote_table('^gspc')
-    # russell['Change'] = russell['Quote Price'] - russell['Previous Close']
-    # russell['Percent Change'] = russell['Change'] / russell['Previous Close'] * 100
-
     major_indices = {'dow': dow, 'sp500': sp500, 'nasdaq': nasdaq}
 
     return jsonify(major_indices), 200
