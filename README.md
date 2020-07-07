@@ -1,4 +1,4 @@
-![Snapstock Logo](https://raw.githubusercontent.com/jonyonson/snapstock-fe/master/src/images/snapstock_logo.svg)
+![Snapstock Logo](https://raw.githubusercontent.com/jonyonson/snapstock-fe/master/src/assets/snapstock_logo.svg)
 
 #### Deployed site: 
 [snapstockapp.com](https://snapstockapp.com)
