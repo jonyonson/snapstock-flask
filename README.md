@@ -12,3 +12,8 @@
 
 <hr>
 
+```sh
+source venv/bin/activate
+pip install Flask yahoo_fin
+python app.py
+```
