@@ -5,6 +5,32 @@ import os
 
 app = Flask(__name__)
 
+def _change(quote):
+  return quote['Quote Price'] - quote['Previous Close']
+
+def _range(range):
+  range_map = map(lambda x: float(x.replace(',','')), range.split(' - '))
+  low_end, high_end = list(range_map)
+  return {'lowEnd': low_end, 'highEnd': high_end}
+
+def _transform_data(quote):
+  day_range = quote['Day\'s Range']
+  year_range = quote['52 Week Range']
+
+  data = {
+    'yearRange': _range(year_range),
+    'dayRange': _range(day_range),
+    'averageVolume': quote['Avg. Volume'],
+    'open': quote['Open'],
+    'previousClose': quote['Previous Close'],
+    'price': quote['Quote Price'],
+    'volume': quote['Volume'],
+    'change': _change(quote),
+    'percentChange': _change(quote) / quote['Previous Close'] * 100
+  }
+
+  return data
+
 
 @app.route('/indices')
 def indices():
@@ -24,6 +50,18 @@ def indices():
     major_indices = {'dow': dow, 'sp500': sp500, 'nasdaq': nasdaq}
 
     return jsonify(major_indices), 200
+
+@app.route('/api/v2/indices')
+def indices_v2():
+  dow_quote = get_quote_table('^dji')
+  sp500_quote = get_quote_table('^gspc')
+  nasdaq_quote = get_quote_table('^ixic')
+
+  return jsonify({
+    'dow': _transform_data(dow_quote),
+    'nasdaq': _transform_data(nasdaq_quote),
+    'sp500': _transform_data(sp500_quote),
+  }), 200
 
 
 if __name__ == '__main__':
