@@ -56,16 +56,21 @@ def indices_v2():
   dow_quote = get_quote_table('^dji')
   sp_500_quote = get_quote_table('^gspc')
   nasdaq_quote = get_quote_table('^ixic')
-  russell_2000_quote = get_quote_table('^rut')
-
-
+  # russell_2000_quote = get_quote_table('^rut')
+  # vix = get_quote_table('^vix')
 
   return jsonify({
     'dow': _transform_data(dow_quote),
     'nasdaq': _transform_data(nasdaq_quote),
     'sp500': _transform_data(sp_500_quote),
-    'russell2000': _transform_data(russell_2000_quote)
+    # 'russell2000': _transform_data(russell_2000_quote),
+    # 'vix': _transform_data(vix)
   }), 200
+
+@app.route('/api/v2/indices/<symbol>')
+def index(symbol):
+  quote = get_quote_table(symbol)
+  return jsonify(_transform_data(quote))
 
 
 if __name__ == '__main__':
