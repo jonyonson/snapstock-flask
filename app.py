@@ -54,13 +54,17 @@ def indices():
 @app.route('/api/v2/indices')
 def indices_v2():
   dow_quote = get_quote_table('^dji')
-  sp500_quote = get_quote_table('^gspc')
+  sp_500_quote = get_quote_table('^gspc')
   nasdaq_quote = get_quote_table('^ixic')
+  russell_2000_quote = get_quote_table('^rut')
+
+
 
   return jsonify({
     'dow': _transform_data(dow_quote),
     'nasdaq': _transform_data(nasdaq_quote),
-    'sp500': _transform_data(sp500_quote),
+    'sp500': _transform_data(sp_500_quote),
+    'russell2000': _transform_data(russell_2000_quote)
   }), 200
 
 
