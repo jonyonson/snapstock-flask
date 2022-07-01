@@ -67,7 +67,7 @@ def indices_v2():
     # 'vix': _transform_data(vix)
   }), 200
 
-@app.route('/api/v2/indices/<symbol>')
+@app.route('/api/quote/<symbol>')
 def index(symbol):
   quote = get_quote_table(symbol)
   return jsonify(_transform_data(quote))
